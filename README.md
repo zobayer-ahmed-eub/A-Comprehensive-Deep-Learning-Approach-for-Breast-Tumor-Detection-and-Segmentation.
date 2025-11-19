@@ -1,0 +1,2 @@
+# A-Comprehensive-Deep-Learning-Approach-for-Breast-Tumor-Detection-and-Segmentation.
+This thesis proposes an automated ultrasound system using CNNs and transformers to segment and classify breast lesions as normal, benign, or malignant. Enhanced by boosting and explainability tools, the framework improves screening accuracy and transparency. The goal is faster, reliable early detection to optimize patient outcomes.
