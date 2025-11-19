@@ -1,207 +1,87 @@
-# Byte-compiled / optimized / DLL files
-__pycache__/
-*.py[codz]
-*$py.class
+## 📌 Project Overview
 
-# C extensions
-*.so
+This repository houses the code for an **end-to-end automated system** designed to detect, classify, and segment breast lesions in ultrasound images. Developed as part of a Master's thesis, this system aims to assist radiologists by providing a "second opinion" using advanced Deep Learning techniques.
 
-# Distribution / packaging
-.Python
-build/
-develop-eggs/
-dist/
-downloads/
-eggs/
-.eggs/
-lib/
-lib64/
-parts/
-sdist/
-var/
-wheels/
-share/python-wheels/
-*.egg-info/
-.installed.cfg
-*.egg
-MANIFEST
+The framework performs two parallel tasks:
 
-# PyInstaller
-#  Usually these files are written by a python script from a template
-#  before PyInstaller builds the exe, so as to inject date/other infos into it.
-*.manifest
-*.spec
+1.  **Classification:** Diagnoses lesions as **Normal, Benign, or Malignant**.
+2.  **Segmentation:** Generates precise masks to delineate lesion boundaries.
 
-# Installer logs
-pip-log.txt
-pip-delete-this-directory.txt
+## 📂 Data Availability
 
-# Unit test / coverage reports
-htmlcov/
-.tox/
-.nox/
-.coverage
-.coverage.*
-.cache
-nosetests.xml
-coverage.xml
-*.cover
-*.py.cover
-.hypothesis/
-.pytest_cache/
-cover/
+To ensure robust generalization across different ultrasound devices and patient demographics, this study utilizes a **combined dataset** merged from three open-source repositories.
 
-# Translations
-*.mo
-*.pot
+The models were trained and evaluated on a unified compilation of the following sources:
 
-# Django stuff:
-*.log
-local_settings.py
-db.sqlite3
-db.sqlite3-journal
+1.  **BUSI (Breast Ultrasound Images Dataset)**
 
-# Flask stuff:
-instance/
-.webassets-cache
+      * **Source:** Al-Dhabyani et al. (2020)
+      * **Description:** Contains 780 images with ground truth maps, categorized into normal, benign, and malignant classes.
+      * **Reference:** *Data in Brief, 28, 104863.*
 
-# Scrapy stuff:
-.scrapy
+2.  **BUS-UCLM (Breast Ultrasound Lesion Segmentation Dataset)**
 
-# Sphinx documentation
-docs/_build/
+      * **Source:** Vallez et al. (2024)
+      * **Description:** Comprises 683 images from 38 patients, collected to improve segmentation accuracy in difficult clinical cases.
+      * **Reference:** *Scientific Data (Nature), 12, 242.*
 
-# PyBuilder
-.pybuilder/
-target/
+3.  **BrEaST-Lesions\_USG**
 
-# Jupyter Notebook
-.ipynb_checkpoints
+      * **Source:** Kasprzak et al. / Kaggle
+      * **Folder Name:** `BrEaST-Lesions_USG-images_and_masks`
+      * **Description:** A diverse collection of ultrasound images including patient-level annotations, used to further augment the training diversity.
 
-# IPython
-profile_default/
-ipython_config.py
+> **⚠️ Data Access & Privacy:**
+> Due to medical data licensing and GitHub file size limits, the raw image files are **not** included in this repository.
+>
+>   * **Instructions:** Download the datasets from their respective official sources (Kaggle/Mendeley Data), merge them into a single directory structure, and update the `DATA_DIR` path in the notebooks.
 
-# pyenv
-#   For a library or package, you might want to ignore these files since the code is
-#   intended to run in multiple environments; otherwise, check them in:
-# .python-version
+## 🚀 Key Features
 
-# pipenv
-#   According to pypa/pipenv#598, it is recommended to include Pipfile.lock in version control.
-#   However, in case of collaboration, if having platform-specific dependencies or dependencies
-#   having no cross-platform support, pipenv may install dependencies that don't work, or not
-#   install all needed dependencies.
-#Pipfile.lock
+  * **Hybrid Deep Learning:** Utilizes both **CNNs** (ResNet, EfficientNet, ConvNeXt) and **Transformers** for robust feature extraction.
+  * **Advanced Techniques:**
+      * **Squeeze-and-Excitation (SE) Blocks:** To recalibrate channel-wise feature responses.
+      * **Focal Loss:** To address class imbalance between normal, benign, and malignant samples.
+      * **Ensemble Boosting:** Combines weak learners to improve classification accuracy.
 
-# UV
-#   Similar to Pipfile.lock, it is generally recommended to include uv.lock in version control.
-#   This is especially recommended for binary packages to ensure reproducibility, and is more
-#   commonly ignored for libraries.
-#uv.lock
+## 📂 Repository Structure
 
-# poetry
-#   Similar to Pipfile.lock, it is generally recommended to include poetry.lock in version control.
-#   This is especially recommended for binary packages to ensure reproducibility, and is more
-#   commonly ignored for libraries.
-#   https://python-poetry.org/docs/basic-usage/#commit-your-poetrylock-file-to-version-control
-#poetry.lock
-#poetry.toml
+### 1\. Classification Modules
 
-# pdm
-#   Similar to Pipfile.lock, it is generally recommended to include pdm.lock in version control.
-#   pdm recommends including project-wide configuration in pdm.toml, but excluding .pdm-python.
-#   https://pdm-project.org/en/latest/usage/project/#working-with-version-control
-#pdm.lock
-#pdm.toml
-.pdm-python
-.pdm-build/
+Algorithms for categorizing ultrasound images (Normal vs. Benign vs. Malignant).
 
-# pixi
-#   Similar to Pipfile.lock, it is generally recommended to include pixi.lock in version control.
-#pixi.lock
-#   Pixi creates a virtual environment in the .pixi directory, just like venv module creates one
-#   in the .venv directory. It is recommended not to include this directory in version control.
-.pixi
+| Model | Framework | Notebook File | Description |
+| :--- | :--- | :--- | :--- |
+| **ConvNeXt Tiny** | PyTorch | `convonext-tiny-mod.ipynb` | Modern CNN architecture with advanced augmentations (Albumentations). |
+| **ResNet-50** | PyTorch | `resnet-50-mod.ipynb` | Standard ResNet-50 implementation in PyTorch. |
+| **ResNet-50 (SE)** | TensorFlow | `resnet-50-se-class-focalloss.ipynb` | **Custom implementation** featuring Squeeze-and-Excitation blocks and Focal Loss. |
+| **EfficientNet B0** | TensorFlow | `efficientnet-b0.ipynb` | Lightweight, efficient model implementation. |
+| **EfficientNet B0** | PyTorch | `efficientnet-b0-mod.ipynb` | PyTorch version of EfficientNet B0. |
 
-# PEP 582; used by e.g. github.com/David-OConnor/pyflow and github.com/pdm-project/pdm
-__pypackages__/
+### 2\. Segmentation Modules
 
-# Celery stuff
-celerybeat-schedule
-celerybeat.pid
+Algorithms for pixel-level lesion masking.
 
-# SageMath parsed files
-*.sage.py
+| Model | Framework | Notebook File | Description |
+| :--- | :--- | :--- | :--- |
+| **U-Net** | TensorFlow | `breast_cancer_image_segmentation_with_Unet.ipynb` | Standard biomedical image segmentation architecture. |
+| **ResUNet** | TensorFlow | `breast-cancer-image-segmentation-Resunet.ipynb` | Hybrid U-Net with Residual blocks for deeper feature propagation. |
 
-# Environments
-.env
-.envrc
-.venv
-env/
-venv/
-ENV/
-env.bak/
-venv.bak/
+## 🛠️ Tech Stack & Requirements
 
-# Spyder project settings
-.spyderproject
-.spyproject
+To run these notebooks, you will need **Python 3.8+** and the following libraries:
 
-# Rope project settings
-.ropeproject
+```bash
+pip install torch torchvision tensorflow keras albumentations opencv-python scikit-learn matplotlib pandas
+```
 
-# mkdocs documentation
-/site
+## 📈 Results
 
-# mypy
-.mypy_cache/
-.dmypy.json
-dmypy.json
+  * **Metrics:** Accuracy, Precision, Recall, F1-Score, IoU (Intersection over Union), and Dice Coefficient.
+  * **Visuals:** See the `Screenshot` included above for a preview of model outputs/training curves.
 
-# Pyre type checker
-.pyre/
+-----
 
-# pytype static type analyzer
-.pytype/
-
-# Cython debug symbols
-cython_debug/
-
-# PyCharm
-#  JetBrains specific template is maintained in a separate JetBrains.gitignore that can
-#  be found at https://github.com/github/gitignore/blob/main/Global/JetBrains.gitignore
-#  and can be added to the global gitignore or merged into this file.  For a more nuclear
-#  option (not recommended) you can uncomment the following to ignore the entire idea folder.
-#.idea/
-
-# Abstra
-# Abstra is an AI-powered process automation framework.
-# Ignore directories containing user credentials, local state, and settings.
-# Learn more at https://abstra.io/docs
-.abstra/
-
-# Visual Studio Code
-#  Visual Studio Code specific template is maintained in a separate VisualStudioCode.gitignore 
-#  that can be found at https://github.com/github/gitignore/blob/main/Global/VisualStudioCode.gitignore
-#  and can be added to the global gitignore or merged into this file. However, if you prefer, 
-#  you could uncomment the following to ignore the entire vscode folder
-# .vscode/
-
-# Ruff stuff:
-.ruff_cache/
-
-# PyPI configuration file
-.pypirc
-
-# Cursor
-#  Cursor is an AI-powered code editor. `.cursorignore` specifies files/directories to
-#  exclude from AI features like autocomplete and code analysis. Recommended for sensitive data
-#  refer to https://docs.cursor.com/context/ignore-files
-.cursorignore
-.cursorindexingignore
-
-# Marimo
-marimo/_static/
-marimo/_lsp/
-__marimo__/
+*Author: Zobayer Ahmed*
+*Thesis Project*
+*License: MIT*
