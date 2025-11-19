@@ -1,87 +1,70 @@
-## 📌 Project Overview
+# --- Python & Virtual Environments ---
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+.env
+.venv
+pip-log.txt
+pip-delete-this-directory.txt
+build/
+dist/
+*.egg-info/
 
-This repository houses the code for an **end-to-end automated system** designed to detect, classify, and segment breast lesions in ultrasound images. Developed as part of a Master's thesis, this system aims to assist radiologists by providing a "second opinion" using advanced Deep Learning techniques.
+# --- Jupyter Notebooks ---
+# Checkpoints are auto-generated and should not be uploaded
+.ipynb_checkpoints
+*/.ipynb_checkpoints/*
+profile_default/
+ipython_config.py
 
-The framework performs two parallel tasks:
+# --- Deep Learning Models & Weights ---
+# Prevent uploading massive model files (keep repo size small)
+*.h5
+*.hdf5
+*.pth
+*.pt
+*.ckpt
+*.pb
+*.onnx
+*.tflite
+saved_models/
+model_checkpoints/
+weights/
 
-1.  **Classification:** Diagnoses lesions as **Normal, Benign, or Malignant**.
-2.  **Segmentation:** Generates precise masks to delineate lesion boundaries.
+# --- Datasets (CRITICAL: Protect Patient Data) ---
+# Generic data folders
+data/
+dataset/
+datasets/
+images/
+inputs/
+outputs/
+results/
 
-## 📂 Data Availability
+# Specific Thesis Dataset Folders
+BrEaST-Lesions_USG-images_and_masks/
+BUSI/
+BUS-UCLM/
+merged_dataset/
 
-To ensure robust generalization across different ultrasound devices and patient demographics, this study utilizes a **combined dataset** merged from three open-source repositories.
+# Compressed archives
+*.zip
+*.tar.gz
+*.rar
+*.7z
 
-The models were trained and evaluated on a unified compilation of the following sources:
+# --- IDE & Editor Settings ---
+.vscode/
+.idea/
+*.swp
+*.swo
 
-1.  **BUSI (Breast Ultrasound Images Dataset)**
-
-      * **Source:** Al-Dhabyani et al. (2020)
-      * **Description:** Contains 780 images with ground truth maps, categorized into normal, benign, and malignant classes.
-      * **Reference:** *Data in Brief, 28, 104863.*
-
-2.  **BUS-UCLM (Breast Ultrasound Lesion Segmentation Dataset)**
-
-      * **Source:** Vallez et al. (2024)
-      * **Description:** Comprises 683 images from 38 patients, collected to improve segmentation accuracy in difficult clinical cases.
-      * **Reference:** *Scientific Data (Nature), 12, 242.*
-
-3.  **BrEaST-Lesions\_USG**
-
-      * **Source:** Kasprzak et al. / Kaggle
-      * **Folder Name:** `BrEaST-Lesions_USG-images_and_masks`
-      * **Description:** A diverse collection of ultrasound images including patient-level annotations, used to further augment the training diversity.
-
-> **⚠️ Data Access & Privacy:**
-> Due to medical data licensing and GitHub file size limits, the raw image files are **not** included in this repository.
->
->   * **Instructions:** Download the datasets from their respective official sources (Kaggle/Mendeley Data), merge them into a single directory structure, and update the `DATA_DIR` path in the notebooks.
-
-## 🚀 Key Features
-
-  * **Hybrid Deep Learning:** Utilizes both **CNNs** (ResNet, EfficientNet, ConvNeXt) and **Transformers** for robust feature extraction.
-  * **Advanced Techniques:**
-      * **Squeeze-and-Excitation (SE) Blocks:** To recalibrate channel-wise feature responses.
-      * **Focal Loss:** To address class imbalance between normal, benign, and malignant samples.
-      * **Ensemble Boosting:** Combines weak learners to improve classification accuracy.
-
-## 📂 Repository Structure
-
-### 1\. Classification Modules
-
-Algorithms for categorizing ultrasound images (Normal vs. Benign vs. Malignant).
-
-| Model | Framework | Notebook File | Description |
-| :--- | :--- | :--- | :--- |
-| **ConvNeXt Tiny** | PyTorch | `convonext-tiny-mod.ipynb` | Modern CNN architecture with advanced augmentations (Albumentations). |
-| **ResNet-50** | PyTorch | `resnet-50-mod.ipynb` | Standard ResNet-50 implementation in PyTorch. |
-| **ResNet-50 (SE)** | TensorFlow | `resnet-50-se-class-focalloss.ipynb` | **Custom implementation** featuring Squeeze-and-Excitation blocks and Focal Loss. |
-| **EfficientNet B0** | TensorFlow | `efficientnet-b0.ipynb` | Lightweight, efficient model implementation. |
-| **EfficientNet B0** | PyTorch | `efficientnet-b0-mod.ipynb` | PyTorch version of EfficientNet B0. |
-
-### 2\. Segmentation Modules
-
-Algorithms for pixel-level lesion masking.
-
-| Model | Framework | Notebook File | Description |
-| :--- | :--- | :--- | :--- |
-| **U-Net** | TensorFlow | `breast_cancer_image_segmentation_with_Unet.ipynb` | Standard biomedical image segmentation architecture. |
-| **ResUNet** | TensorFlow | `breast-cancer-image-segmentation-Resunet.ipynb` | Hybrid U-Net with Residual blocks for deeper feature propagation. |
-
-## 🛠️ Tech Stack & Requirements
-
-To run these notebooks, you will need **Python 3.8+** and the following libraries:
-
-```bash
-pip install torch torchvision tensorflow keras albumentations opencv-python scikit-learn matplotlib pandas
-```
-
-## 📈 Results
-
-  * **Metrics:** Accuracy, Precision, Recall, F1-Score, IoU (Intersection over Union), and Dice Coefficient.
-  * **Visuals:** See the `Screenshot` included above for a preview of model outputs/training curves.
-
------
-
-*Author: Zobayer Ahmed*
-*Thesis Project*
-*License: MIT*
+# --- OS Generated Files ---
+.DS_Store
+Thumbs.db
+ehthumbs.db
+Desktop.ini
